@@ -15,6 +15,7 @@ retrofit = "2.11.0"
 okhttp-bom = "4.12.0"
 chucker = "4.1.0"
 hiltAndroid = "2.51.1"
+googlePlayLocationServices = "21.3.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -35,14 +36,16 @@ androidx-navigation-compose = { group = "androidx.navigation", name = "navigatio
 compose-hilt-navigation = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "composeHiltNaviation" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+retrofit-kotlinx-serialization = { group = "com.squareup.retrofit2", name = "converter-kotlinx-serialization", version.ref = "retrofit" }
 okhttp-bom = { group = "com.squareup.okhttp3", name = "okhttp-bom", version.ref = "okhttp-bom" }
 okhttp = { group = "com.squareup.okhttp3", name = "okhttp" }
 chucker = { group = "com.github.chuckerteam.chucker", name = "library", version.ref = "chucker" }
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hiltAndroid" }
 hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hiltAndroid" }
+google-play-location-services = { group = "com.google.android.gms", name = "play-services-location", version.ref = "googlePlayLocationServices" }
 
 [bundles]
-network = ["retrofit", "okhttp"]
+network = ["retrofit", "okhttp", "retrofit-kotlinx-serialization"]
 network-debug = ["chucker"]
 compose-navigation-type-safe = ["androidx-navigation-compose", "compose-hilt-navigation", "kotlinx-serialization-json"]
 

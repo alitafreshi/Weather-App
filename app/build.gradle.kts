@@ -69,6 +69,9 @@ dependencies {
     //hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
+
+    //google play location services
+    implementation(libs.google.play.location.services)
 }
 
 kapt {
