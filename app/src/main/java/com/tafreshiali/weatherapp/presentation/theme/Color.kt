@@ -1,4 +1,4 @@
-package com.tafreshiali.weatherapp.ui.theme
+package com.tafreshiali.weatherapp.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 

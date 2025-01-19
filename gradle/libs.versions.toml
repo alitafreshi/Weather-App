@@ -10,9 +10,11 @@ lifecycleRuntimeKtx = "2.8.7"
 activityCompose = "1.10.0"
 composeBom = "2025.01.00"
 composeNavigation = "2.8.5"
+composeHiltNaviation = "1.2.0"
 retrofit = "2.11.0"
 okhttp-bom = "4.12.0"
 chucker = "4.1.0"
+hiltAndroid = "2.51.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -30,21 +32,25 @@ androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-man
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "composeNavigation" }
+compose-hilt-navigation = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "composeHiltNaviation" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 okhttp-bom = { group = "com.squareup.okhttp3", name = "okhttp-bom", version.ref = "okhttp-bom" }
 okhttp = { group = "com.squareup.okhttp3", name = "okhttp" }
 chucker = { group = "com.github.chuckerteam.chucker", name = "library", version.ref = "chucker" }
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hiltAndroid" }
+hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hiltAndroid" }
 
 [bundles]
 network = ["retrofit", "okhttp"]
 network-debug = ["chucker"]
-compose-navigation-type-safe = ["androidx-navigation-compose", "kotlinx-serialization-json"]
-
+compose-navigation-type-safe = ["androidx-navigation-compose", "compose-hilt-navigation", "kotlinx-serialization-json"]
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlix-serialization-plugin = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+kotlin-kapt = { id = "kotlin-kapt" }
+hilt-android-plugin = { id = "com.google.dagger.hilt.android", version.ref = "hiltAndroid" }
 
