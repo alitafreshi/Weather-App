@@ -2,6 +2,7 @@ package com.tafreshiali.weatherapp.di
 
 import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerInterceptor
+import com.tafreshiali.weatherapp.data.interceptors.ApiKeyInterceptor
 import com.tafreshiali.weatherapp.data.remote.WeatherService
 import dagger.Module
 import dagger.Provides
@@ -26,11 +27,19 @@ object NetworkModule {
     fun provideWeatherApiService(retrofit: Retrofit): WeatherService =
         retrofit.create(WeatherService::class.java)
 
+    @Singleton
+    @Provides
+    fun provideApiKeyInterceptor(): ApiKeyInterceptor = ApiKeyInterceptor()
+
 
     @Singleton
     @Provides
-    fun provideOkHttpClient(chcukerInterceptor: ChuckerInterceptor): OkHttpClient {
-        return OkHttpClient.Builder().addInterceptor(chcukerInterceptor).build()
+    fun provideOkHttpClient(
+        apiKeyInterceptor: ApiKeyInterceptor,
+        chcukerInterceptor: ChuckerInterceptor
+    ): OkHttpClient {
+        return OkHttpClient.Builder().addInterceptor(apiKeyInterceptor)
+            .addInterceptor(chcukerInterceptor).build()
     }
 
     @Singleton
