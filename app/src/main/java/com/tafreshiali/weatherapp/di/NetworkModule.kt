@@ -46,6 +46,7 @@ object NetworkModule {
     @Provides
     fun provideRetrofitKotlinxSerialization(): Json = Json {
         ignoreUnknownKeys = true
+        isLenient = true
     }
 
     @Singleton
