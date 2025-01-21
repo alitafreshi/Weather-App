@@ -5,5 +5,5 @@ import com.tafreshiali.weatherapp.data.state.DataState
 import kotlinx.coroutines.flow.Flow
 
 interface WeatherRepository {
-    suspend fun getWeatherForecastingByLocation(cityName: String): Flow<DataState<WeatherApiDto>>
+    fun getWeatherForecastingByLocation(cityName: String): Flow<DataState<WeatherApiDto>>
 }

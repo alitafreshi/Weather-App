@@ -16,7 +16,7 @@ class WeatherRepositoryImpl @Inject constructor(
     private val weatherService: WeatherService,
     private val json: Json
 ) : WeatherRepository {
-    override suspend fun getWeatherForecastingByLocation(cityName: String): Flow<DataState<WeatherApiDto>> =
+    override fun getWeatherForecastingByLocation(cityName: String): Flow<DataState<WeatherApiDto>> =
         flow {
             emit(DataState.Loading)
             val forecastingRequest = weatherService.getWeatherDetailBaseOnLocationName(
