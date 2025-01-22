@@ -1,5 +1,6 @@
 package com.tafreshiali.weatherapp.presentation
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tafreshiali.weatherapp.data.state.DataState
@@ -17,25 +18,26 @@ import javax.inject.Inject
 class WeatherViewModel @Inject constructor(private val weatherRepository: WeatherRepository) :
     ViewModel() {
 
+    private val _weatherViewState = MutableStateFlow(WeatherViewState())
+    val weatherViewState = _weatherViewState.asStateFlow()
+
     init {
+        Log.d("WEATHER_VIEWMODEL", "INIT BLOCK IS CALLED")
         getWeatherForecastDataByCityName("Tehran")
     }
-
-    private val _weatherData = MutableStateFlow(WeatherViewState())
-    private val weatherData = _weatherData.asStateFlow()
 
     fun getWeatherForecastDataByCityName(cityName: String) {
         weatherRepository.getWeatherForecastingByLocation(cityName = cityName)
             .onEach { dataState ->
                 when (dataState) {
-                    DataState.Loading -> _weatherData.update {
+                    DataState.Loading -> _weatherViewState.update {
                         it.copy(
                             loadingState = true,
                             errorState = false
                         )
                     }
 
-                    is DataState.Data -> _weatherData.update {
+                    is DataState.Data -> _weatherViewState.update {
                         it.copy(
                             loadingState = false,
                             errorState = false,
@@ -43,7 +45,7 @@ class WeatherViewModel @Inject constructor(private val weatherRepository: Weathe
                         )
                     }
 
-                    is DataState.Error -> _weatherData.update {
+                    is DataState.Error -> _weatherViewState.update {
                         it.copy(
                             loadingState = false,
                             errorState = true
