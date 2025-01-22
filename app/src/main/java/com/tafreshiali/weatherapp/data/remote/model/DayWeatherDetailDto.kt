@@ -8,25 +8,25 @@ import androidx.annotation.Keep
 @Serializable
 data class DayWeatherDetailDto(
     @SerialName("avghumidity")
-    val averageHumidity: Int?,
+    val averageHumidity: Double?,
     @SerialName("avgtemp_c")
     val averageTemperatureCelsius: Double?,
     @SerialName("avgtemp_f")
     val averageTemperatureFahrenheit: Double?,
     @SerialName("avgvis_km")
-    val averageVisibilityKilometer: Int?,
+    val averageVisibilityKilometer: Double?,
     @SerialName("avgvis_miles")
-    val averageVisibilityMiles: Int?,
+    val averageVisibilityMiles: Double?,
     @SerialName("condition")
     val airConditionDto: AirConditionDto?,
     @SerialName("daily_chance_of_rain")
     val dailyChanceOfRain: Int?,
     @SerialName("daily_chance_of_snow")
-    val dailyChanceOfSnow: Int?,
+    val dailyChanceOfSnow: Double?,
     @SerialName("daily_will_it_rain")
-    val dailyWillItRain: Int?,
+    val dailyWillItRain: Double?,
     @SerialName("daily_will_it_snow")
-    val dailyWillItSnow: Int?,
+    val dailyWillItSnow: Double?,
     @SerialName("maxtemp_c")
     val maximumTemperatureCelsius: Double?,
     @SerialName("maxtemp_f")

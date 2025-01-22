@@ -9,11 +9,11 @@ import androidx.annotation.Keep
 @Serializable
 data class HourlyForecastingDetailDto(
     @SerialName("chance_of_rain")
-    val chanceOfRain: Int?,
+    val chanceOfRain: Double?,
     @SerialName("chance_of_snow")
-    val chanceOfSnow: Int?,
+    val chanceOfSnow: Double?,
     @SerialName("cloud")
-    val cloud: Int?,
+    val cloud: Double?,
     @SerialName("condition")
     val airConditionDto: AirConditionDto?,
     @SerialName("feelslike_c")
@@ -21,11 +21,11 @@ data class HourlyForecastingDetailDto(
     @SerialName("feelslike_f")
     val feelsLikeTemperatureFahrenheit: Double?,
     @SerialName("humidity")
-    val humidity: Int?,
+    val humidity: Double?,
     @SerialName("is_day")
     val isDay: Int?,
     @SerialName("snow_cm")
-    val snowCm: Int?,
+    val snowCm: Double?,
     @SerialName("temp_c")
     val temperatureCelsius: Double?,
     @SerialName("temp_f")
@@ -35,9 +35,9 @@ data class HourlyForecastingDetailDto(
     @SerialName("uv")
     val uv: Double?,
     @SerialName("vis_km")
-    val visibilityKilometer: Int?,
+    val visibilityKilometer: Double?,
     @SerialName("vis_miles")
-    val visibilityMiles: Int?,
+    val visibilityMiles: Double?,
     @SerialName("will_it_rain")
     val willItRain: Int?,
     @SerialName("will_it_snow")

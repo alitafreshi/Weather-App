@@ -20,7 +20,7 @@ data class CurrentWeatherDto(
     @SerialName("heatindex_f")
     val heatIndexFahrenheit: Double?,
     @SerialName("humidity")
-    val humidity: Int?,
+    val humidity: Double?,
     @SerialName("is_day")
     val isDay: Int?,
     @SerialName("last_updated")
@@ -28,13 +28,13 @@ data class CurrentWeatherDto(
     @SerialName("temp_c")
     val temperatureCelsius: Double?,
     @SerialName("temp_f")
-    val temperatureFahrenheit: Int?,
+    val temperatureFahrenheit: Double?,
     @SerialName("uv")
-    val uv: Int?,
+    val uv: Double?,
     @SerialName("vis_km")
-    val visibilityKilometer: Int?,
+    val visibilityKilometer: Double?,
     @SerialName("vis_miles")
-    val visibilityMiles: Int?,
+    val visibilityMiles: Double?,
     @SerialName("wind_kph")
     val windSpeedKph: Double?,
     @SerialName("wind_mph")
