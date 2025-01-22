@@ -16,6 +16,7 @@ okhttp-bom = "4.12.0"
 chucker = "4.1.0"
 hiltAndroid = "2.51.1"
 googlePlayLocationServices = "21.3.0"
+composeCoil = "3.0.4"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -43,11 +44,14 @@ chucker = { group = "com.github.chuckerteam.chucker", name = "library", version.
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hiltAndroid" }
 hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hiltAndroid" }
 google-play-location-services = { group = "com.google.android.gms", name = "play-services-location", version.ref = "googlePlayLocationServices" }
+compose-coil = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "composeCoil" }
+coil-network = { group = "io.coil-kt.coil3", name = "coil-network-okhttp", version.ref = "composeCoil" }
 
 [bundles]
 network = ["retrofit", "okhttp", "retrofit-kotlinx-serialization"]
 network-debug = ["chucker"]
 compose-navigation-type-safe = ["androidx-navigation-compose", "compose-hilt-navigation", "kotlinx-serialization-json"]
+compose-coil = ["compose-coil", "coil-network"]
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

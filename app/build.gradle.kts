@@ -72,6 +72,9 @@ dependencies {
 
     //google play location services
     implementation(libs.google.play.location.services)
+
+    //coil
+    implementation(libs.bundles.compose.coil)
 }
 
 kapt {
