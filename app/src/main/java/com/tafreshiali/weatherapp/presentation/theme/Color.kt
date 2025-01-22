@@ -11,6 +11,7 @@ val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
 
 val OnSurface = Color(0xFF303345)
+val OnSurfaceDisabled = Color(0xFF9C9EAA)
 val SurfaceContainer30 = Color(0x5CFFFFFF)
 val SurfaceContainer60 = Color(0x5CFFFFFF)
 val SurfaceContainer70 = Color(0x5CFFFFFF)
