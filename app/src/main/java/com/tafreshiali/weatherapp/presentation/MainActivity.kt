@@ -10,8 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
-import com.tafreshiali.weatherapp.presentation.theme.WeatherAppTheme
+import com.tafreshiali.weatherapp.presentation.theme.design_system.WeatherAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,17 +21,19 @@ class MainActivity : ComponentActivity() {
         setContent {
             WeatherAppTheme {
                 val colorStops = arrayOf(
-                    0.0f to Color(0xFFFEE3BC),
-                    1f to Color(0xFFF39876)
+                    0.0f to WeatherAppTheme.colorScheme.primaryLight,
+                    1f to WeatherAppTheme.colorScheme.primaryDark
                 )
                 val brush = Brush.linearGradient(colorStops = colorStops)
                 Scaffold(
                     modifier = Modifier
                         .fillMaxSize()
                 ) { innerPadding ->
-                    AppNavigation(modifier = Modifier
-                        .background(brush)
-                        .padding(innerPadding))
+                    AppNavigation(
+                        modifier = Modifier
+                            .background(brush)
+                            .padding(innerPadding)
+                    )
                 }
             }
         }
