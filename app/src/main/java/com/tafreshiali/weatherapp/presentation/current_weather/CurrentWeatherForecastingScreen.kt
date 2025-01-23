@@ -1,15 +1,12 @@
 package com.tafreshiali.weatherapp.presentation.current_weather
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.Text
+import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.tafreshiali.weatherapp.presentation.WeatherViewModel
+import com.tafreshiali.weatherapp.presentation.current_weather.components.CurrentWeatherForecastingTopBar
 
 @Composable
 fun CurrentWeatherForecastingScreen(
@@ -17,11 +14,13 @@ fun CurrentWeatherForecastingScreen(
     modifier: Modifier = Modifier
 ) {
     val weatherViewState = weatherViewModel.weatherViewState.collectAsState()
-    Column(
-        modifier = modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(text = "CURRENT WEATHER FORECASTING", modifier = Modifier.fillMaxWidth())
+    //TODO the initialPage and pageCount should be dynamic based on the added locations in dataStore
+    val pagerState = rememberPagerState(initialPage = 0, pageCount = { 3 })
+    Scaffold(
+        topBar = {
+            CurrentWeatherForecastingTopBar(pagerState = pagerState)
+        }
+    ) { innerPadding ->
+
     }
 }

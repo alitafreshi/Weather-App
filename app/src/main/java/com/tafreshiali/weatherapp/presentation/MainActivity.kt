@@ -25,16 +25,11 @@ class MainActivity : ComponentActivity() {
                     1f to WeatherAppTheme.colorScheme.primaryDark
                 )
                 val brush = Brush.linearGradient(colorStops = colorStops)
-                Scaffold(
+                AppNavigation(
                     modifier = Modifier
                         .fillMaxSize()
-                ) { innerPadding ->
-                    AppNavigation(
-                        modifier = Modifier
-                            .background(brush)
-                            .padding(innerPadding)
-                    )
-                }
+                        .background(brush)
+                )
             }
         }
     }
