@@ -17,6 +17,7 @@ chucker = "4.1.0"
 hiltAndroid = "2.51.1"
 googlePlayLocationServices = "21.3.0"
 composeCoil = "3.0.4"
+composeConstraintLayout = "1.1.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -46,6 +47,7 @@ hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-comp
 google-play-location-services = { group = "com.google.android.gms", name = "play-services-location", version.ref = "googlePlayLocationServices" }
 compose-coil = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "composeCoil" }
 coil-network = { group = "io.coil-kt.coil3", name = "coil-network-okhttp", version.ref = "composeCoil" }
+compose-constraint-layout = { group = "androidx.constraintlayout", name = "constraintlayout-compose", version.ref = "composeConstraintLayout" }
 
 [bundles]
 network = ["retrofit", "okhttp", "retrofit-kotlinx-serialization"]
