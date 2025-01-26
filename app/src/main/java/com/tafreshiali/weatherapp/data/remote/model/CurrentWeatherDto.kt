@@ -39,4 +39,6 @@ data class CurrentWeatherDto(
     val windSpeedKph: Double?,
     @SerialName("wind_mph")
     val windSpeedMph: Double?,
+    @SerialName("precip_mm")
+    val rainInMillimeter: Double?,
 )

@@ -76,6 +76,9 @@ dependencies {
 
     //coil
     implementation(libs.bundles.compose.coil)
+
+    //dateTime
+    implementation(libs.date.time.threeten)
 }
 
 kapt {

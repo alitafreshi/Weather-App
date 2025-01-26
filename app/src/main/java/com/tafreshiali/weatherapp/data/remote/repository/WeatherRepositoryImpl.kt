@@ -4,8 +4,10 @@ import android.util.Log
 import com.tafreshiali.weatherapp.data.remote.WeatherService
 import com.tafreshiali.weatherapp.data.remote.model.ErrorDto
 import com.tafreshiali.weatherapp.data.remote.model.WeatherApiDto
+import com.tafreshiali.weatherapp.data.remote.model.toCurrentWeatherDetail
 import com.tafreshiali.weatherapp.data.state.DataState
 import com.tafreshiali.weatherapp.domain.WeatherRepository
+import com.tafreshiali.weatherapp.domain.model.CurrentWeatherDetail
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
@@ -16,7 +18,7 @@ class WeatherRepositoryImpl @Inject constructor(
     private val weatherService: WeatherService,
     private val json: Json
 ) : WeatherRepository {
-    override fun getWeatherForecastingByLocation(cityName: String): Flow<DataState<WeatherApiDto>> =
+    override fun getWeatherForecastingByLocation(cityName: String): Flow<DataState<CurrentWeatherDetail>> =
         flow {
             emit(DataState.Loading)
             val forecastingRequest = weatherService.getWeatherDetailBaseOnLocationName(
@@ -26,7 +28,11 @@ class WeatherRepositoryImpl @Inject constructor(
             val requestBody = forecastingRequest.body()
             when {
                 forecastingRequest.isSuccessful && requestBody != null -> {
-                    emit(DataState.Data(requestBody))
+                    val currentWeatherDetail = requestBody.toCurrentWeatherDetail() ?: run {
+                        emit(DataState.Error("There is an error with mapping dto to domain"))
+                        return@flow
+                    }
+                    emit(DataState.Data(currentWeatherDetail))
                 }
 
                 else -> {

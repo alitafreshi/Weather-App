@@ -1,9 +1,12 @@
 package com.tafreshiali.weatherapp.data.remote.model
 
-
+import androidx.annotation.Keep
+import com.tafreshiali.weatherapp.domain.model.HourlyWeatherForecasting
+import com.tafreshiali.weatherapp.domain.utils.convertServerDateTimeStringToDateTimeFormat
+import com.tafreshiali.weatherapp.domain.utils.generateNext24HourLaterTime
+import com.tafreshiali.weatherapp.domain.utils.isInNext24Hour
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import androidx.annotation.Keep
 
 @Keep
 @Serializable
@@ -47,3 +50,32 @@ data class HourlyForecastingDetailDto(
     @SerialName("wind_mph")
     val windSpeedMph: Double?,
 )
+
+fun HourlyForecastingDetailDto.toHourlyWeatherForecasting(): HourlyWeatherForecasting? {
+    return HourlyWeatherForecasting(
+        time = time ?: return null,
+        temperature = temperatureCelsius?.toString() ?: return null,
+        weatherCondition = airConditionDto?.toWeatherCondition() ?: return null
+    )
+}
+
+fun List<HourlyForecastingDetailDto>.toHourlyWeatherForecastingList(): List<HourlyWeatherForecasting> =
+    buildList {
+        val next24HourTime = generateNext24HourLaterTime()
+        this@toHourlyWeatherForecastingList.forEach { dto ->
+            dto.time?.let {
+                val currentServerDateTime =
+                    convertServerDateTimeStringToDateTimeFormat(serverDateTimeString = it)
+                if (currentServerDateTime?.isInNext24Hour(next24HourTime) == true) {
+                    add(
+                        HourlyWeatherForecasting(
+                            time = currentServerDateTime.hour.toString(),
+                            temperature = dto.temperatureCelsius?.toString() ?: return@forEach,
+                            weatherCondition = dto.airConditionDto?.toWeatherCondition()
+                                ?: return@forEach
+                        )
+                    )
+                }
+            } ?: return@forEach
+        }
+    }

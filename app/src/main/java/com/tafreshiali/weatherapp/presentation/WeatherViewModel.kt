@@ -37,12 +37,14 @@ class WeatherViewModel @Inject constructor(private val weatherRepository: Weathe
                         )
                     }
 
-                    is DataState.Data -> _weatherViewState.update {
-                        it.copy(
-                            loadingState = false,
-                            errorState = false,
-                            weatherData = dataState.data
-                        )
+                    is DataState.Data -> {
+                        _weatherViewState.update {
+                            it.copy(
+                                loadingState = false,
+                                errorState = false,
+                                weatherData = dataState.data
+                            )
+                        }
                     }
 
                     is DataState.Error -> _weatherViewState.update {
