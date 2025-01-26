@@ -2,7 +2,6 @@ package com.tafreshiali.weatherapp.presentation.current_weather.components
 
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -13,6 +12,7 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.TopAppBarDefaults.centerAlignedTopAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -32,12 +32,11 @@ import com.tafreshiali.weatherapp.presentation.theme.design_system.WeatherAppThe
 @Composable
 fun CurrentWeatherForecastingTopBar(
     modifier: Modifier = Modifier,
-    pagerState: PagerState
+    pagerState: PagerState,
 ) {
     CenterAlignedTopAppBar(
         modifier = modifier
-            .padding(horizontal = WeatherAppTheme.size.medium)
-            .background(Color.Transparent),
+            .padding(horizontal = WeatherAppTheme.size.medium),
         title = {
             WormPageIndicator(
                 totalPages = pagerState.pageCount,
@@ -47,13 +46,19 @@ fun CurrentWeatherForecastingTopBar(
         },
         navigationIcon = {
             Icon(
+                modifier = Modifier.size(30.dp),
                 painter = painterResource(R.drawable.ic_search),
                 contentDescription = "search_icon"
             )
         },
         actions = {
-            Icon(painter = painterResource(R.drawable.ic_menu), contentDescription = "menu_icon")
-        }
+            Icon(
+                modifier = Modifier.size(30.dp),
+                painter = painterResource(R.drawable.ic_menu),
+                contentDescription = "menu_icon"
+            )
+        },
+        colors = centerAlignedTopAppBarColors().copy(containerColor = Color.Transparent)
     )
 }
 
