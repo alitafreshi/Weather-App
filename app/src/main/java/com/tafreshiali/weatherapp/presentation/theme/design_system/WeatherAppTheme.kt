@@ -70,6 +70,11 @@ private val typography = AppTypography(
         fontFamily = Inter,
         fontWeight = FontWeight.Bold,
         fontSize = 8.sp
+    ),
+    bold43 = TextStyle(
+        fontFamily = Inter,
+        fontWeight = FontWeight.Bold,
+        fontSize = 43.sp
     )
 )
 
