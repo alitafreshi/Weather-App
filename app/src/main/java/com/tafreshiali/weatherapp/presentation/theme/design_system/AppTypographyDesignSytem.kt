@@ -12,7 +12,8 @@ data class AppTypography(
     val regular11: TextStyle,
     val semiBold7: TextStyle,
     val bold7: TextStyle,
-    val bold8: TextStyle
+    val bold8: TextStyle,
+    val bold43: TextStyle
 )
 
 val LocalAppTypography = staticCompositionLocalOf {
@@ -25,6 +26,7 @@ val LocalAppTypography = staticCompositionLocalOf {
         regular11 = TextStyle.Default,
         semiBold7 = TextStyle.Default,
         bold7 = TextStyle.Default,
-        bold8 = TextStyle.Default
+        bold8 = TextStyle.Default,
+        bold43 = TextStyle.Default
     )
 }
