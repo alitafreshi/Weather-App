@@ -21,17 +21,6 @@
   <path
       android:pathData="M8.146,12.739C10.146,12.339 12.313,13.572 13.146,14.239C14.146,10.239 13.646,7.405 13.146,6.739C10.146,8.239 8.48,11.739 8.146,12.739Z"
       android:fillAlpha="0.2">
-    <aapt:attr name="android:fillColor">
-      <gradient 
-          android:startX="10.935"
-          android:startY="6.739"
-          android:endX="10.935"
-          android:endY="14.239"
-          android:type="linear">
-        <item android:offset="0" android:color="#FF000000"/>
-        <item android:offset="1" android:color="#00000000"/>
-      </gradient>
-    </aapt:attr>
   </path>
   <path
       android:pathData="M13.146,14.239C15.546,13.439 17.146,15.239 17.646,16.239C18.846,10.239 15.146,7.405 13.146,6.739C13.946,9.139 13.48,12.739 13.146,14.239Z"

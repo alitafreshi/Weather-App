@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -28,8 +29,7 @@ fun CurrentLocationWeatherForecastingPagerComponent(
     temperature: String,
     temperatureUnit: String,
     weatherStatus: String,
-    weatherLocalIcon: Int,
-    weatherIconUrl: String
+    weatherIcon: Any,
 ) {
     //TODO Here We should use view pager
     /*HorizontalPager(
@@ -44,8 +44,7 @@ fun CurrentLocationWeatherForecastingPagerComponent(
         temperature = temperature,
         temperatureUnit = temperatureUnit,
         weatherStatus = weatherStatus,
-        weatherIcon = weatherLocalIcon,
-        weatherIconUrl = weatherIconUrl
+        weatherIcon = weatherIcon,
     )
 }
 
@@ -56,8 +55,7 @@ private fun PageContentComponent(
     temperature: String,
     temperatureUnit: String,
     weatherStatus: String,
-    weatherIcon: Int,
-    weatherIconUrl: String
+    weatherIcon: Any,
 ) {
     ConstraintLayout {
         val (cityNameComponent, temperatureComponent) = createRefs()
@@ -65,7 +63,7 @@ private fun PageContentComponent(
             cityName = cityName,
             dateTime = dateTime,
             modifier = Modifier
-                .padding(start = 30.dp)
+                .padding(start = 15.dp)
                 .constrainAs(cityNameComponent) {
                     top.linkTo(parent.top)
                     start.linkTo(parent.start)
@@ -75,13 +73,12 @@ private fun PageContentComponent(
             temperatureUnit = temperatureUnit,
             weatherStatus = weatherStatus,
             weatherIcon = weatherIcon,
-            weatherIconUrl = weatherIconUrl,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 25.dp)
                 .constrainAs(temperatureComponent) {
                     top.linkTo(cityNameComponent.bottom)
                     start.linkTo(parent.start)
+                    end.linkTo(parent.end)
                 })
 
     }
@@ -98,7 +95,6 @@ private fun PageContentComponentPreview() {
             temperatureUnit = "C",
             weatherStatus = "Sunny",
             weatherIcon = R.drawable.ic_sun_and_cloud,
-            weatherIconUrl = ""
         )
     }
 }
@@ -135,10 +131,9 @@ private fun TemperatureComponent(
     temperature: String,
     temperatureUnit: String,
     weatherStatus: String,
-    weatherIcon: Int,
-    weatherIconUrl: String
+    weatherIcon: Any,
 ) {
-    ConstraintLayout(modifier = modifier.padding(horizontal = 40.dp)) {
+    ConstraintLayout(modifier = modifier.padding(end = 40.dp)) {
         val (
             tvTemperatureNumber,
             tvTemperatureSymbol,
@@ -148,7 +143,7 @@ private fun TemperatureComponent(
         ) = createRefs()
 
         Text(text = temperatureUnit, modifier = Modifier.constrainAs(tvTemperatureUnit) {
-            top.linkTo(parent.top, margin = 10.dp)
+            top.linkTo(parent.top, margin = 8.dp)
             end.linkTo(parent.end)
         })
 
@@ -162,13 +157,14 @@ private fun TemperatureComponent(
             style = WeatherAppTheme.typography.bold43,
             fontSize = 65.sp,
             modifier = Modifier.constrainAs(tvTemperatureNumber) {
-                top.linkTo(parent.top, margin = 5.dp)
+                top.linkTo(parent.top)
                 end.linkTo(tvTemperatureSymbol.start, margin = 10.dp)
             })
 
         Text(
             text = weatherStatus,
             style = WeatherAppTheme.typography.regular14,
+            fontSize = 20.sp,
             modifier = Modifier.constrainAs(tvWeatherStatus) {
                 top.linkTo(tvTemperatureNumber.bottom)
                 start.linkTo(tvTemperatureNumber.start)
@@ -176,13 +172,13 @@ private fun TemperatureComponent(
             })
 
         AsyncImage(
-            model = weatherIconUrl,
+            model = weatherIcon,
             contentDescription = null,
+            contentScale = ContentScale.Crop,
             modifier = Modifier
-                .size(140.dp)
+                .size(160.dp)
                 .constrainAs(imgWeatherStatus) {
                     start.linkTo(parent.start)
-                    end.linkTo(tvTemperatureNumber.start, margin = 35.dp)
                     top.linkTo(parent.top)
                     bottom.linkTo(parent.bottom)
                 })
@@ -198,7 +194,6 @@ private fun TemperatureComponentPreview() {
             temperatureUnit = "C",
             weatherStatus = "Sunny",
             weatherIcon = R.drawable.ic_sun_and_cloud,
-            weatherIconUrl = ""
         )
     }
 }

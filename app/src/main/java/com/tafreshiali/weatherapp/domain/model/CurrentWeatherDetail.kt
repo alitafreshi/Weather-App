@@ -6,10 +6,10 @@ data class CurrentWeatherDetail(
     val temperature: String,
     val temperatureUnit: TemperatureUnit,
     val weatherCondition: WeatherCondition,
-    val rainFallInMillimeter: Double,
-    val humidity: Double,
+    val rainFallInMillimeter: Int,
+    val humidity: Int,
     val isDay: Boolean,
-    val windSpeed: Double,
+    val windSpeed: Int,
     val windSpeedUnit: WindSpeedUnit,
     val hourlyWeatherForecastingUntilNextDay: List<HourlyWeatherForecasting>
 )

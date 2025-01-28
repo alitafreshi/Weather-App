@@ -12,6 +12,7 @@ import com.tafreshiali.weatherapp.presentation.theme.OnSurfaceDisabled
 import com.tafreshiali.weatherapp.presentation.theme.PrimaryDark
 import com.tafreshiali.weatherapp.presentation.theme.PrimaryLight
 import com.tafreshiali.weatherapp.presentation.theme.SurfaceContainer30
+import com.tafreshiali.weatherapp.presentation.theme.SurfaceContainer50
 import com.tafreshiali.weatherapp.presentation.theme.SurfaceContainer60
 import com.tafreshiali.weatherapp.presentation.theme.SurfaceContainer70
 
@@ -21,6 +22,7 @@ private val lightColorScheme = AppColorSchema(
     onSurface = OnSurface,
     onSurfaceDisabled = OnSurfaceDisabled,
     surfaceContainer30 = SurfaceContainer30,
+    surfaceContainer50 = SurfaceContainer50,
     surfaceContainer60 = SurfaceContainer60,
     surfaceContainer70 = SurfaceContainer70
 )

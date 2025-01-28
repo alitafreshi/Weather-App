@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Weather App</string>
+    <string name="weather_condition_tv_rain_fall_title">RainFall</string>
+    <string name="weather_condition_tv_rain_fall_value_in_centimeter">%scm</string>
+    <string name="weather_condition_tv_wind_title">Wind</string>
+    <string name="weather_condition_tv_wind_value_in_kilometer_per_hour">%skm/h</string>
+    <string name="weather_condition_tv_humidity_title">Humidity</string>
+    <string name="weather_condition_tv_humidity_value_in_percentage">%s %</string>
 </resources>
