@@ -19,6 +19,7 @@ import com.tafreshiali.weatherapp.R
 import com.tafreshiali.weatherapp.presentation.WeatherViewModel
 import com.tafreshiali.weatherapp.presentation.current_weather.components.CurrentLocationWeatherForecastingPagerComponent
 import com.tafreshiali.weatherapp.presentation.current_weather.components.CurrentWeatherForecastingTopBar
+import com.tafreshiali.weatherapp.presentation.current_weather.components.Next24HourWeatherForecastingHeaderComponent
 import com.tafreshiali.weatherapp.presentation.current_weather.components.WeatherConditionInfoComponent
 import com.tafreshiali.weatherapp.presentation.theme.design_system.WeatherAppTheme
 
@@ -66,6 +67,7 @@ fun CurrentWeatherForecastingScreen(
                         )
 
                     }
+
                     item {
                         WeatherConditionInfoComponent(
                             conditionTitle = stringResource(
@@ -100,6 +102,10 @@ fun CurrentWeatherForecastingScreen(
                             conditionValue = "${weatherData.humidity}%",
                             conditionIcon = R.drawable.ic_humidity,
                         )
+                    }
+
+                    item {
+                        Next24HourWeatherForecastingHeaderComponent()
                     }
                 }
             }
