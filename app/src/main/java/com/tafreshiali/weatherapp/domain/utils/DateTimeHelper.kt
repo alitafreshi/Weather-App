@@ -120,10 +120,11 @@ fun getCurrentDateTime(): LocalDateTime? {
 
 // Generate time range
 fun generateNext24HourLaterTime(): List<LocalDateTime> = buildList {
-    val currentTime = getCurrentDateTime() ?: return@buildList
+    var currentTime = getCurrentDateTime() ?: return@buildList
     add(currentTime)
     repeat(23) {
-        add(currentTime.plusHours(1))
+        currentTime = currentTime.plusHours(1)
+        add(currentTime)
     }
 }
 

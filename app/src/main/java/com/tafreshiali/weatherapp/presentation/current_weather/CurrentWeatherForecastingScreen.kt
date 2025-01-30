@@ -19,6 +19,7 @@ import com.tafreshiali.weatherapp.R
 import com.tafreshiali.weatherapp.presentation.WeatherViewModel
 import com.tafreshiali.weatherapp.presentation.current_weather.components.CurrentLocationWeatherForecastingPagerComponent
 import com.tafreshiali.weatherapp.presentation.current_weather.components.CurrentWeatherForecastingTopBar
+import com.tafreshiali.weatherapp.presentation.current_weather.components.Next24HourWeatherForecastingDetailComponent
 import com.tafreshiali.weatherapp.presentation.current_weather.components.Next24HourWeatherForecastingHeaderComponent
 import com.tafreshiali.weatherapp.presentation.current_weather.components.WeatherConditionInfoComponent
 import com.tafreshiali.weatherapp.presentation.theme.design_system.WeatherAppTheme
@@ -106,6 +107,11 @@ fun CurrentWeatherForecastingScreen(
 
                     item {
                         Next24HourWeatherForecastingHeaderComponent()
+                    }
+                    item {
+                        Next24HourWeatherForecastingDetailComponent(
+                            next24HourWeatherForecastingData = weatherData.hourlyWeatherForecastingUntilNextDay
+                        )
                     }
                 }
             }
