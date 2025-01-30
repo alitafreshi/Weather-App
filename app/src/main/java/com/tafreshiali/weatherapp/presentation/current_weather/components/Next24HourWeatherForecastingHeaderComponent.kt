@@ -29,7 +29,7 @@ fun Next24HourWeatherForecastingHeaderComponent(
         Text(
             text = "Today",
             style = WeatherAppTheme.typography.bold8,
-            fontSize = 20.sp,
+            fontSize = 15.sp,
             modifier = Modifier.constrainAs(tvTodayTitle) {
                 top.linkTo(imgNextWeek.top)
                 bottom.linkTo(imgNextWeek.bottom)
@@ -38,8 +38,8 @@ fun Next24HourWeatherForecastingHeaderComponent(
 
         Text(
             text = "Tomorrow",
-            style = WeatherAppTheme.typography.regular8.copy(color = Color(0xFFD6996B)),
-            fontSize = 20.sp,
+            style = WeatherAppTheme.typography.regular8.copy(color = Color(0x67000000)),
+            fontSize = 15.sp,
             modifier = Modifier.constrainAs(tvTomorrowTitle) {
                 top.linkTo(imgNextWeek.top)
                 bottom.linkTo(imgNextWeek.bottom)
@@ -47,18 +47,20 @@ fun Next24HourWeatherForecastingHeaderComponent(
             }
         )
         Icon(
-            modifier = Modifier.size(35.dp).constrainAs(imgNextWeek) {
-                top.linkTo(parent.top)
-                end.linkTo(parent.end)
-            },
+            modifier = Modifier
+                .size(24.dp)
+                .constrainAs(imgNextWeek) {
+                    top.linkTo(parent.top)
+                    end.linkTo(parent.end)
+                },
             painter = painterResource(R.drawable.ic_arrow_right),
             contentDescription = "",
-            tint = Color(0xFFD6996B)
+            tint = Color(0xA1000000)
         )
         Text(
             text = "Next Week",
-            style = WeatherAppTheme.typography.regular8.copy(color = Color(0xFFD6996B)),
-            fontSize = 20.sp,
+            style = WeatherAppTheme.typography.regular8.copy(color = Color(0x67000000)),
+            fontSize = 15.sp,
             modifier = Modifier.constrainAs(tvNextWeekTitle) {
                 top.linkTo(imgNextWeek.top)
                 bottom.linkTo(imgNextWeek.bottom)
@@ -74,13 +76,13 @@ fun Next24HourWeatherForecastingHeaderComponent(
                 bottom.linkTo(parent.bottom)
             },
             thickness = 2.dp,
-            color = Color(0xFFE2A272)
+            color = Color(0x0A000000)
         )
 
         Surface(
             modifier = Modifier
                 .height(5.dp)
-                .width(12.dp)
+                .width(16.dp)
                 .constrainAs(badge) {
                     top.linkTo(divider.top)
                     bottom.linkTo(divider.bottom)
