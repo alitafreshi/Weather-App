@@ -9,9 +9,14 @@ import kotlinx.serialization.Serializable
 @Serializable
 data object CurrentWeatherForecasting
 
-fun NavGraphBuilder.currentWeatherForecastingDestination() {
+fun NavGraphBuilder.currentWeatherForecastingDestination(
+    next7DaysWeatherForecastingDetailCallback: () -> Unit
+) {
     composable<CurrentWeatherForecasting> { backStackEntry ->
         val weatherViewModel = hiltViewModel<WeatherViewModel>(backStackEntry)
-        CurrentWeatherForecastingScreen(weatherViewModel = weatherViewModel)
+        CurrentWeatherForecastingScreen(
+            weatherViewModel = weatherViewModel,
+            next7DaysWeatherForecastingDetailCallback = next7DaysWeatherForecastingDetailCallback
+        )
     }
 }

@@ -27,7 +27,8 @@ import com.tafreshiali.weatherapp.presentation.theme.design_system.WeatherAppThe
 @Composable
 fun CurrentWeatherForecastingScreen(
     weatherViewModel: WeatherViewModel,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    next7DaysWeatherForecastingDetailCallback: () -> Unit
 ) {
     val weatherViewState = weatherViewModel.weatherViewState.collectAsState()
     //TODO the initialPage and pageCount should be dynamic based on the added locations in dataStore
@@ -106,7 +107,9 @@ fun CurrentWeatherForecastingScreen(
                     }
 
                     item {
-                        Next24HourWeatherForecastingHeaderComponent()
+                        Next24HourWeatherForecastingHeaderComponent(
+                            nextWeekWeatherForecastingDetailCallback = next7DaysWeatherForecastingDetailCallback
+                        )
                     }
                     item {
                         Next24HourWeatherForecastingDetailComponent(

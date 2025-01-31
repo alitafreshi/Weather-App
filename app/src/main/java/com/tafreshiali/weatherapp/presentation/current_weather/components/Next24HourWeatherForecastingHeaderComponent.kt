@@ -1,5 +1,6 @@
 package com.tafreshiali.weatherapp.presentation.current_weather.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -21,7 +22,8 @@ import com.tafreshiali.weatherapp.presentation.theme.design_system.WeatherAppThe
 
 @Composable
 fun Next24HourWeatherForecastingHeaderComponent(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    nextWeekWeatherForecastingDetailCallback: () -> Unit
 ) {
     ConstraintLayout(modifier = modifier.padding(vertical = 10.dp)) {
         val (tvTodayTitle, tvTomorrowTitle, tvNextWeekTitle, imgNextWeek, divider, badge) = createRefs()
@@ -52,7 +54,7 @@ fun Next24HourWeatherForecastingHeaderComponent(
                 .constrainAs(imgNextWeek) {
                     top.linkTo(parent.top)
                     end.linkTo(parent.end)
-                },
+                }.clickable(onClick = nextWeekWeatherForecastingDetailCallback),
             painter = painterResource(R.drawable.ic_arrow_right),
             contentDescription = "",
             tint = Color(0xA1000000)
@@ -65,7 +67,7 @@ fun Next24HourWeatherForecastingHeaderComponent(
                 top.linkTo(imgNextWeek.top)
                 bottom.linkTo(imgNextWeek.bottom)
                 end.linkTo(imgNextWeek.start, margin = 6.dp)
-            }
+            }.clickable(onClick = nextWeekWeatherForecastingDetailCallback)
         )
 
         HorizontalDivider(
@@ -100,6 +102,6 @@ fun Next24HourWeatherForecastingHeaderComponent(
 @Composable
 private fun Next24HourWeatherForecastingHeaderComponentPreview() {
     WeatherAppTheme {
-        Next24HourWeatherForecastingHeaderComponent()
+        Next24HourWeatherForecastingHeaderComponent(nextWeekWeatherForecastingDetailCallback = {})
     }
 }
