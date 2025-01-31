@@ -16,7 +16,10 @@ fun NavGraphBuilder.currentWeatherForecastingDestination(
         val weatherViewModel = hiltViewModel<WeatherViewModel>(backStackEntry)
         CurrentWeatherForecastingScreen(
             weatherViewModel = weatherViewModel,
-            next7DaysWeatherForecastingDetailCallback = next7DaysWeatherForecastingDetailCallback
+            next7DaysWeatherForecastingDetailCallback = {
+                weatherViewModel.getNextWeekWeatherForecastDataByCityName("Tehran")
+                next7DaysWeatherForecastingDetailCallback()
+            }
         )
     }
 }

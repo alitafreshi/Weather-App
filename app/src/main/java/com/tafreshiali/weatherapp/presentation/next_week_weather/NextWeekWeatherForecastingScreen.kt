@@ -22,14 +22,14 @@ fun NextWeekWeatherForecastingScreen(
     weatherViewModel: WeatherViewModel,
     modifier: Modifier = Modifier
 ) {
-    val weatherViewState = weatherViewModel.weatherViewState.collectAsState()
+    val weatherViewState = weatherViewModel.nextWeekWeatherForecastingViewState.collectAsState()
 
     val colorStops = arrayOf(
         0.0f to WeatherAppTheme.colorScheme.primaryLight,
         1f to WeatherAppTheme.colorScheme.primaryDark
     )
     val brush = Brush.linearGradient(colorStops = colorStops)
-    val weatherData = weatherViewState.value.weatherData
+    val weatherData = weatherViewState.value.nextWeekWeatherForecastData
     Scaffold(
         topBar = {
             NextWeekWeatherForecastingTopBar()
