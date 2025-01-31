@@ -1,11 +1,10 @@
 package com.tafreshiali.weatherapp.domain.utils
 
 import android.util.Log
+import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.LocalTime
 import org.threeten.bp.format.DateTimeFormatter
-import java.text.SimpleDateFormat
-import java.util.Locale
 import kotlin.coroutines.cancellation.CancellationException
 
 // Converter function
@@ -31,6 +30,22 @@ fun convertServerDateTimeStringToDateTimeFormat(serverDateTimeString: String): L
     val conversionResult = runCatching {
         val inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
         LocalDateTime.parse(serverDateTimeString, inputFormatter)
+    }
+    conversionResult.fold(
+        onSuccess = { time -> return time },
+        onFailure = { exception ->
+            exception.printStackTrace()
+            if (exception is CancellationException) {
+                throw exception
+            }
+            return null
+        })
+}
+
+fun convertServerDateStringToDateFormat(serverDateTimeString: String): LocalDate? {
+    val conversionResult = runCatching {
+        val inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        LocalDate.parse(serverDateTimeString, inputFormatter)
     }
     conversionResult.fold(
         onSuccess = { time -> return time },
@@ -153,3 +168,16 @@ fun String.convertLocalDateTimeToHumanReadableFormat(): String? {
         }
     )
 }
+
+fun calculateNextWeek(): List<LocalDate> = buildList {
+    var currentDate = LocalDate.now()
+    repeat(7) {
+        currentDate = currentDate.plusDays(1)
+        add(currentDate)
+    }
+}
+
+fun isDateInNextWeek(nextWeek: List<LocalDate>, date: LocalDate): Boolean =
+    nextWeek.any { it == date }
+
+
