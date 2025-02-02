@@ -76,7 +76,7 @@ class WeatherViewModel @Inject constructor(private val weatherRepository: Weathe
                     }
 
                     is DataState.Data -> {
-                        Log.d("WEATHRE_DATA", "next week weather forecast data: ${dataState.data}")
+                        Log.d("WEATHER_DATA", "next week weather forecast data: ${dataState.data}")
                         _nextWeekWeatherForecastingViewState.update {
                             it.copy(
                                 loadingState = false,

@@ -1,5 +1,6 @@
 package com.tafreshiali.weatherapp.data.remote.model
 
+import android.util.Log
 import androidx.annotation.Keep
 import com.tafreshiali.weatherapp.domain.model.HourlyWeatherForecasting
 import com.tafreshiali.weatherapp.domain.model.NextWeekWeatherForecastingDetail
@@ -31,31 +32,33 @@ fun ForecastDto.toNext24HourHourlyWeatherForecastingList(): List<HourlyWeatherFo
 
 fun ForecastDto.toNextWeekWeatherForecastingList(): List<NextWeekWeatherForecastingDetail>? {
     val nextWeek = calculateNextWeek()
-    val forecastDetail = forecastDaysWeatherDetails?.mapNotNull { detailDto ->
-        val serverDateString = detailDto.date ?: return@mapNotNull null
+    val forecastDetail = forecastDaysWeatherDetails?.mapIndexedNotNull { index, detailDto ->
+        val serverDateString = detailDto.date ?: return@mapIndexedNotNull null
         val date =
-            convertServerDateStringToDateFormat(serverDateString) ?: return@mapNotNull null
+            convertServerDateStringToDateFormat(serverDateString) ?: return@mapIndexedNotNull null
         val isDateInNextWeek =
             isDateInNextWeek(nextWeek = nextWeek, date = date)
         if (isDateInNextWeek) {
-            return@mapNotNull NextWeekWeatherForecastingDetail(
+            return@mapIndexedNotNull NextWeekWeatherForecastingDetail(
+                id = index,
+                date = date,
                 dayTitle = date.dayOfWeek.toString().lowercase()
                     .replaceFirstChar { it.uppercase() },
                 temperature = detailDto.dayWeatherDetailDto?.averageTemperatureCelsius?.roundToInt()
-                    ?.toString() ?: return@mapNotNull null,
+                    ?.toString() ?: return@mapIndexedNotNull null,
                 temperatureUnit = TemperatureUnit.Celsius,
                 weatherCondition = detailDto.dayWeatherDetailDto.airConditionDto?.toWeatherCondition()
-                    ?: return@mapNotNull null,
+                    ?: return@mapIndexedNotNull null,
                 windSpeed = detailDto.dayWeatherDetailDto.maximumWindSpeedKph?.roundToInt()
-                    ?.toString() ?: return@mapNotNull null,
+                    ?.toString() ?: return@mapIndexedNotNull null,
                 windSpeedUnit = WindSpeedUnit.KilometerPerHour,
                 humidity = detailDto.dayWeatherDetailDto.averageHumidity?.roundToInt()?.toString()
-                    ?: return@mapNotNull null,
+                    ?: return@mapIndexedNotNull null,
                 rainFallInMillimeter = detailDto.dayWeatherDetailDto.dailyChanceOfRain
-                    ?: return@mapNotNull null
+                    ?: return@mapIndexedNotNull null
             )
         }
-        return@mapNotNull null
+        return@mapIndexedNotNull null
     }
     return forecastDetail
 }
