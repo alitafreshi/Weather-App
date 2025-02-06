@@ -1,6 +1,6 @@
 package com.tafreshiali.weatherapp.presentation.current_weather.components
 
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -10,6 +10,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -19,6 +20,7 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.tafreshiali.weatherapp.R
 import com.tafreshiali.weatherapp.presentation.theme.design_system.WeatherAppTheme
+import com.tafreshiali.weatherapp.presentation.utils.clickableWithoutRipple
 
 @Composable
 fun Next24HourWeatherForecastingHeaderComponent(
@@ -54,7 +56,11 @@ fun Next24HourWeatherForecastingHeaderComponent(
                 .constrainAs(imgNextWeek) {
                     top.linkTo(parent.top)
                     end.linkTo(parent.end)
-                }.clickable(onClick = nextWeekWeatherForecastingDetailCallback),
+                }
+                .clickableWithoutRipple(
+                    interactionSource = remember { MutableInteractionSource() },
+                    onClick = nextWeekWeatherForecastingDetailCallback
+                ),
             painter = painterResource(R.drawable.ic_arrow_right),
             contentDescription = "",
             tint = Color(0xA1000000)
@@ -63,11 +69,16 @@ fun Next24HourWeatherForecastingHeaderComponent(
             text = "Next Week",
             style = WeatherAppTheme.typography.regular8.copy(color = Color(0x67000000)),
             fontSize = 15.sp,
-            modifier = Modifier.constrainAs(tvNextWeekTitle) {
-                top.linkTo(imgNextWeek.top)
-                bottom.linkTo(imgNextWeek.bottom)
-                end.linkTo(imgNextWeek.start, margin = 6.dp)
-            }.clickable(onClick = nextWeekWeatherForecastingDetailCallback)
+            modifier = Modifier
+                .constrainAs(tvNextWeekTitle) {
+                    top.linkTo(imgNextWeek.top)
+                    bottom.linkTo(imgNextWeek.bottom)
+                    end.linkTo(imgNextWeek.start, margin = 6.dp)
+                }
+                .clickableWithoutRipple(
+                    interactionSource = remember { MutableInteractionSource() },
+                    onClick = nextWeekWeatherForecastingDetailCallback
+                )
         )
 
         HorizontalDivider(

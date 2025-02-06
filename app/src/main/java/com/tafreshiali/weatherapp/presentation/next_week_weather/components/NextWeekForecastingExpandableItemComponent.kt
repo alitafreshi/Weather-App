@@ -10,7 +10,7 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -33,6 +33,7 @@ import com.tafreshiali.weatherapp.R
 import com.tafreshiali.weatherapp.domain.model.NextWeekWeatherForecastingDetail
 import com.tafreshiali.weatherapp.presentation.current_weather.components.AppIconComponent
 import com.tafreshiali.weatherapp.presentation.theme.design_system.WeatherAppTheme
+import com.tafreshiali.weatherapp.presentation.utils.clickableWithoutRipple
 
 
 @Composable
@@ -82,9 +83,11 @@ fun NextWeekForecastingExpandableItemComponent(
     Surface(
         modifier = modifier
             .fillMaxWidth()
-            .clickable {
-                onClickExpanded(weekDayWeatherForecastingDetail.id)
-            },
+            .clickableWithoutRipple(
+                interactionSource = remember { MutableInteractionSource() },
+                onClick = {
+                    onClickExpanded(weekDayWeatherForecastingDetail.id)
+                }),
         color = animateExpandedItemBgColor,
         shape = WeatherAppTheme.shapes.large,
         border = BorderStroke(

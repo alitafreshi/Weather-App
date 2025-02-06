@@ -28,9 +28,11 @@ class MainActivity : ComponentActivity() {
             val brush = Brush.linearGradient(colorStops = colorStops)
             WeatherAppTheme {
                 SetLightStatusBarIcons()
-                AppNavigation(modifier = Modifier
-                    .fillMaxSize()
-                    .background(brush))
+                AppNavigation(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(brush)
+                )
             }
         }
     }
