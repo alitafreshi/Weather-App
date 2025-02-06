@@ -2,9 +2,7 @@ package com.tafreshiali.weatherapp.presentation.next_week_weather.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColor
-import androidx.compose.animation.animateContentSize
-import androidx.compose.animation.core.VectorConverter
-import androidx.compose.animation.core.animateValue
+import androidx.compose.animation.core.animateDp
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
 import androidx.compose.animation.expandVertically
@@ -26,16 +24,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.constraintlayout.compose.ConstraintLayout
 import coil3.compose.AsyncImage
 import com.tafreshiali.weatherapp.R
 import com.tafreshiali.weatherapp.domain.model.NextWeekWeatherForecastingDetail
 import com.tafreshiali.weatherapp.presentation.current_weather.components.AppIconComponent
 import com.tafreshiali.weatherapp.presentation.theme.design_system.WeatherAppTheme
-import org.threeten.bp.LocalDate
 
 
 @Composable
@@ -70,6 +67,18 @@ fun NextWeekForecastingExpandableItemComponent(
         }
     )
 
+    val animatePadding by transition.animateDp(
+        label = "animatePadding",
+        transitionSpec = { tween(durationMillis = 500) },
+        targetValueByState = { state ->
+            if (state) {
+                16.dp // Expanded state padding
+            } else {
+                0.dp // Collapsed state padding (adjust as needed)
+            }
+        }
+    )
+
     Surface(
         modifier = modifier
             .fillMaxWidth()
@@ -83,55 +92,41 @@ fun NextWeekForecastingExpandableItemComponent(
             color = animateExpandedItemStrokeColor
         )
     ) {
-        ConstraintLayout(modifier = Modifier.padding(vertical = 16.dp, horizontal = 11.dp)) {
-            val (tvWeekDayTitle, tvTemperatureTitle, icWeatherCondition, expandableContent) = createRefs()
-            Text(
-                text = weekDayWeatherForecastingDetail.dayTitle,
-                style = WeatherAppTheme.typography.semiBold7.copy(fontSize = 15.sp),
-                modifier = Modifier.constrainAs(tvWeekDayTitle) {
-                    top.linkTo(parent.top)
-                    start.linkTo(parent.start)
-                    if (expanded) {
-                        bottom.linkTo(expandableContent.top)
-                    } else {
-                        bottom.linkTo(parent.bottom)
-                    }
-                }
-            )
-            Text(
-                text = weekDayWeatherForecastingDetail.temperature,
-                style = WeatherAppTheme.typography.bold7.copy(fontSize = 15.sp),
-                modifier = Modifier.constrainAs(tvTemperatureTitle) {
-                    top.linkTo(parent.top)
-                    end.linkTo(icWeatherCondition.start, margin = 5.dp)
-                    if (expanded) {
-                        bottom.linkTo(expandableContent.top)
-                    } else {
-                        bottom.linkTo(parent.bottom)
-                    }
-                }
-            )
-
-            AsyncImage(
-                model = weekDayWeatherForecastingDetail.weatherCondition.conditionIconUrl,
-                contentDescription = null,
-                modifier = Modifier
-                    .size(45.dp)
-                    .constrainAs(icWeatherCondition) {
-                        top.linkTo(parent.top)
-                        end.linkTo(parent.end)
-                    }
-            )
+        Column(
+            modifier = Modifier.padding(vertical = 16.dp, horizontal = 16.dp),
+            verticalArrangement = Arrangement.spacedBy(animatePadding)
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Text(
+                    text = weekDayWeatherForecastingDetail.dayTitle,
+                    style = WeatherAppTheme.typography.semiBold7.copy(fontSize = 15.sp),
+                    modifier = Modifier.weight(1f)
+                )
+                Text(
+                    text = weekDayWeatherForecastingDetail.temperature,
+                    style = WeatherAppTheme.typography.bold7.copy(
+                        fontSize = 15.sp,
+                        textAlign = TextAlign.End
+                    ),
+                    modifier = Modifier.weight(0.1f),
+                )
+                AsyncImage(
+                    model = weekDayWeatherForecastingDetail.weatherCondition.conditionIconUrl,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .weight(0.2f)
+                        .size(45.dp)
+                )
+            }
             ExpandableContent(
                 isExpanded = expanded,
                 windSpeed = weekDayWeatherForecastingDetail.windSpeed,
                 humidity = weekDayWeatherForecastingDetail.humidity,
                 rainFallInMillimeter = weekDayWeatherForecastingDetail.rainFallInMillimeter.toString(),
-                modifier = Modifier.constrainAs(expandableContent) {
-                    start.linkTo(parent.start)
-                    end.linkTo(parent.end)
-                    top.linkTo(icWeatherCondition.bottom, margin = 11.dp)
-                }
+                modifier = Modifier
             )
         }
     }
@@ -160,7 +155,7 @@ private fun ExpandableContent(
     }
     val exitTransition = remember {
         shrinkVertically(
-            shrinkTowards = Alignment.Top,
+            shrinkTowards = Alignment.Bottom,
             animationSpec = tween(
                 durationMillis = 500
             )
@@ -183,15 +178,15 @@ private fun ExpandableContent(
         ) {
             NextWeekForecastingExpandableItemComponent(
                 icon = R.drawable.ic_rain_fall,
-                title = rainFallInMillimeter
+                title = "$rainFallInMillimeter cm"
             )
             NextWeekForecastingExpandableItemComponent(
                 icon = R.drawable.ic_wind,
-                title = windSpeed
+                title = "$windSpeed km/h"
             )
             NextWeekForecastingExpandableItemComponent(
                 icon = R.drawable.ic_humidity,
-                title = humidity
+                title = "$humidity%"
             )
         }
     }
