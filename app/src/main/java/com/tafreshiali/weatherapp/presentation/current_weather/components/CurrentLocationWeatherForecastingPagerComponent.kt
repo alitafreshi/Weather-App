@@ -45,11 +45,13 @@ fun CurrentLocationWeatherForecastingPagerComponent(
         temperatureUnit = temperatureUnit,
         weatherStatus = weatherStatus,
         weatherIcon = weatherIcon,
+        modifier = modifier
     )
 }
 
 @Composable
 private fun PageContentComponent(
+    modifier: Modifier = Modifier,
     cityName: String,
     dateTime: String,
     temperature: String,
@@ -57,7 +59,7 @@ private fun PageContentComponent(
     weatherStatus: String,
     weatherIcon: Any,
 ) {
-    ConstraintLayout {
+    ConstraintLayout(modifier = modifier.fillMaxWidth()) {
         val (cityNameComponent, temperatureComponent) = createRefs()
         CityNameComponent(
             cityName = cityName,

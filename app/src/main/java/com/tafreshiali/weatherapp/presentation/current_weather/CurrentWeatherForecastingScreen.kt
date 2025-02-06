@@ -55,10 +55,11 @@ fun CurrentWeatherForecastingScreen(
                         .fillMaxSize()
                         .padding(innerPadding),
                     verticalArrangement = Arrangement.spacedBy(10.dp),
-                    contentPadding = PaddingValues(start = 15.dp, end = 15.dp),
+                    contentPadding = PaddingValues(bottom = 10.dp)
                 ) {
                     item {
                         CurrentLocationWeatherForecastingPagerComponent(
+                            modifier = Modifier.padding(horizontal = 15.dp),
                             pagerState = pagerState,
                             cityName = weatherData.locationName,
                             dateTime = weatherData.dateTime,
@@ -72,6 +73,7 @@ fun CurrentWeatherForecastingScreen(
 
                     item {
                         WeatherConditionInfoComponent(
+                            modifier = Modifier.padding(horizontal = 15.dp),
                             conditionTitle = stringResource(
                                 R.string.weather_condition_tv_rain_fall_title
                             ),
@@ -85,6 +87,7 @@ fun CurrentWeatherForecastingScreen(
 
                     item {
                         WeatherConditionInfoComponent(
+                            modifier = Modifier.padding(horizontal = 15.dp),
                             conditionTitle = stringResource(
                                 R.string.weather_condition_tv_wind_title
                             ),
@@ -98,6 +101,7 @@ fun CurrentWeatherForecastingScreen(
 
                     item {
                         WeatherConditionInfoComponent(
+                            modifier = Modifier.padding(horizontal = 15.dp),
                             conditionTitle = stringResource(
                                 R.string.weather_condition_tv_humidity_title
                             ),
@@ -108,9 +112,11 @@ fun CurrentWeatherForecastingScreen(
 
                     item {
                         Next24HourWeatherForecastingHeaderComponent(
+                            modifier = Modifier.padding(horizontal = 15.dp),
                             nextWeekWeatherForecastingDetailCallback = next7DaysWeatherForecastingDetailCallback
                         )
                     }
+
                     item {
                         Next24HourWeatherForecastingDetailComponent(
                             next24HourWeatherForecastingData = weatherData.hourlyWeatherForecastingUntilNextDay
