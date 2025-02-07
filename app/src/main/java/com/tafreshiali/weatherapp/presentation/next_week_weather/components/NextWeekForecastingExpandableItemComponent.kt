@@ -14,9 +14,11 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,13 +26,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.tafreshiali.weatherapp.R
 import com.tafreshiali.weatherapp.domain.model.NextWeekWeatherForecastingDetail
+import com.tafreshiali.weatherapp.presentation.components.TemperatureComponent
 import com.tafreshiali.weatherapp.presentation.current_weather.components.AppIconComponent
 import com.tafreshiali.weatherapp.presentation.theme.design_system.WeatherAppTheme
 import com.tafreshiali.weatherapp.presentation.utils.clickableWithoutRipple
@@ -108,14 +110,11 @@ fun NextWeekForecastingExpandableItemComponent(
                     style = WeatherAppTheme.typography.semiBold7.copy(fontSize = 15.sp),
                     modifier = Modifier.weight(1f)
                 )
-                Text(
-                    text = weekDayWeatherForecastingDetail.temperature,
-                    style = WeatherAppTheme.typography.bold7.copy(
-                        fontSize = 15.sp,
-                        textAlign = TextAlign.End
-                    ),
-                    modifier = Modifier.weight(0.1f),
+                TemperatureComponent(
+                    temperature = weekDayWeatherForecastingDetail.temperature,
+                    modifier = Modifier.weight(0.1f)
                 )
+                Spacer(modifier = Modifier.width(5.dp))
                 AsyncImage(
                     model = weekDayWeatherForecastingDetail.weatherCondition.conditionIconUrl,
                     contentDescription = null,

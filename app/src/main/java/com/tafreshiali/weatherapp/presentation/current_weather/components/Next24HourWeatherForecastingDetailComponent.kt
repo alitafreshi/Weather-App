@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.tafreshiali.weatherapp.domain.model.HourlyWeatherForecasting
+import com.tafreshiali.weatherapp.presentation.components.TemperatureComponent
 import com.tafreshiali.weatherapp.presentation.theme.design_system.WeatherAppTheme
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.debounce
@@ -82,10 +83,7 @@ fun Next24HourWeatherForecastingDetailComponent(
                         model = item.weatherCondition.conditionIconUrl,
                         contentDescription = ""
                     )
-                    Text(
-                        text = item.temperature,
-                        style = WeatherAppTheme.typography.bold7.copy(fontSize = 15.sp)
-                    )
+                   TemperatureComponent(temperature = item.temperature)
                 }
             }
         }
