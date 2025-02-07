@@ -1,5 +1,6 @@
 package com.tafreshiali.weatherapp.presentation.current_weather
 
+import androidx.core.splashscreen.SplashScreen
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
@@ -12,9 +13,13 @@ import kotlinx.serialization.Serializable
 @Serializable
 data object CurrentWeatherForecasting
 
-fun NavGraphBuilder.currentWeatherForecastingDestination(navController: NavController) {
+fun NavGraphBuilder.currentWeatherForecastingDestination(
+    navController: NavController,
+    splashScreen: SplashScreen
+) {
     composable<CurrentWeatherForecasting> { backStackEntry ->
         val weatherViewModel = backStackEntry.sharedViewModel<WeatherViewModel, WeatherNestedGraph>(navController)
+        splashScreen.setKeepOnScreenCondition { weatherViewModel.weatherViewState.value.loadingState }
         CurrentWeatherForecastingScreen(
             weatherViewModel = weatherViewModel,
             next7DaysWeatherForecastingDetailCallback = {

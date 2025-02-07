@@ -2,6 +2,7 @@ package com.tafreshiali.weatherapp.presentation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.core.splashscreen.SplashScreen
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -20,22 +21,28 @@ import kotlinx.serialization.Serializable
 @Serializable
 data object WeatherNestedGraph
 
-private fun NavGraphBuilder.weatherNestedGraph(navController: NavHostController) {
+private fun NavGraphBuilder.weatherNestedGraph(
+    navController: NavHostController,
+    splashScreen: SplashScreen
+) {
     navigation<WeatherNestedGraph>(startDestination = CurrentWeatherForecasting) {
-        currentWeatherForecastingDestination(navController)
+        currentWeatherForecastingDestination(navController, splashScreen)
         nextWeekWeatherDestination(navController)
     }
 }
 
 @Composable
-fun AppNavigation(modifier: Modifier = Modifier) {
+fun AppNavigation(
+    modifier: Modifier = Modifier,
+    splashScreen: SplashScreen
+) {
     val navController = rememberNavController()
     NavHost(
         modifier = modifier,
         navController = navController,
         startDestination = WeatherNestedGraph
     ) {
-        weatherNestedGraph(navController = navController)
+        weatherNestedGraph(navController = navController, splashScreen = splashScreen)
     }
 }
 
