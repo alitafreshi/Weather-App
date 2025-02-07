@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId = "com.tafreshiali.weatherapp"
-        minSdk = 21
+        minSdk = 23
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -79,6 +79,9 @@ dependencies {
 
     //dateTime
     implementation(libs.date.time.threeten)
+
+    //splash screen
+    implementation(libs.core.splashscreen)
 }
 
 kapt {
