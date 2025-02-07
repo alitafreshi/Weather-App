@@ -13,7 +13,13 @@ data object NextWeekWeatherNavigation
 
 fun NavGraphBuilder.nextWeekWeatherDestination(navController: NavController) {
     composable<NextWeekWeatherNavigation> { backStackEntry ->
-        val weatherViewModel = backStackEntry.sharedViewModel<WeatherViewModel, WeatherNestedGraph>(navController)
-        NextWeekWeatherForecastingScreen(weatherViewModel = weatherViewModel)
+        val weatherViewModel =
+            backStackEntry.sharedViewModel<WeatherViewModel, WeatherNestedGraph>(navController)
+        NextWeekWeatherForecastingScreen(
+            weatherViewModel = weatherViewModel,
+            onClickBack = {
+                navController.navigateUp()
+            }
+        )
     }
 }

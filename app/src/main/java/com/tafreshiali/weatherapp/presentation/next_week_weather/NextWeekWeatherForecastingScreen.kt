@@ -28,7 +28,8 @@ import com.tafreshiali.weatherapp.presentation.theme.design_system.WeatherAppThe
 @Composable
 fun NextWeekWeatherForecastingScreen(
     weatherViewModel: WeatherViewModel,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClickBack: () -> Unit
 ) {
     val weatherViewState = weatherViewModel.nextWeekWeatherForecastingViewState.collectAsState()
 
@@ -43,7 +44,7 @@ fun NextWeekWeatherForecastingScreen(
     if (weatherData != null) {
         Scaffold(
             topBar = {
-                NextWeekWeatherForecastingTopBar()
+                NextWeekWeatherForecastingTopBar(onClickBack = onClickBack)
             }) { innerPadding ->
             Box(
                 modifier = Modifier
