@@ -57,7 +57,7 @@ fun NextWeekWeatherForecastingScreen(
                     verticalArrangement = Arrangement.spacedBy(10.dp),
                     contentPadding = PaddingValues(start = 16.dp, end = 16.dp),
                 ) {
-                    items(weatherData) {
+                    items(weatherData, key = { it.id }) {
                         NextWeekForecastingExpandableItemComponent(
                             weekDayWeatherForecastingDetail = it,
                             expanded = expandedItem == it.id,
