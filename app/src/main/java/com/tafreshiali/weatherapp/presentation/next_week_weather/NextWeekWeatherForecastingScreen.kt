@@ -11,15 +11,14 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.tafreshiali.weatherapp.presentation.WeatherViewModel
 import com.tafreshiali.weatherapp.presentation.next_week_weather.components.NextWeekForecastingExpandableItemComponent
 import com.tafreshiali.weatherapp.presentation.next_week_weather.components.NextWeekWeatherForecastingTopBar
@@ -31,7 +30,7 @@ fun NextWeekWeatherForecastingScreen(
     modifier: Modifier = Modifier,
     onClickBack: () -> Unit
 ) {
-    val weatherViewState = weatherViewModel.nextWeekWeatherForecastingViewState.collectAsState()
+    val weatherViewState = weatherViewModel.nextWeekWeatherForecastingViewState.collectAsStateWithLifecycle()
 
     val colorStops = arrayOf(
         0.0f to WeatherAppTheme.colorScheme.primaryLight,

@@ -10,11 +10,11 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.tafreshiali.weatherapp.R
 import com.tafreshiali.weatherapp.presentation.WeatherViewModel
 import com.tafreshiali.weatherapp.presentation.current_weather.components.CurrentLocationWeatherForecastingPagerComponent
@@ -30,7 +30,7 @@ fun CurrentWeatherForecastingScreen(
     modifier: Modifier = Modifier,
     next7DaysWeatherForecastingDetailCallback: () -> Unit
 ) {
-    val weatherViewState = weatherViewModel.weatherViewState.collectAsState()
+    val weatherViewState = weatherViewModel.weatherViewState.collectAsStateWithLifecycle()
     //TODO the initialPage and pageCount should be dynamic based on the added locations in dataStore
     val pagerState = rememberPagerState(initialPage = 0, pageCount = { 3 })
     val colorStops = arrayOf(
