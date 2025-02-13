@@ -47,6 +47,7 @@ class WeatherRepositoryImpl @Inject constructor(
                 }
             }
         }.catch { exception ->
+            emit(DataState.Error(exception.message.orEmpty()))
             Log.d(
                 "WeatherRepository",
                 "there is a exception with weather api, exception is ${exception.message}"
@@ -82,6 +83,7 @@ class WeatherRepositoryImpl @Inject constructor(
             }
         }
     }.catch { exception ->
+        emit(DataState.Error(exception.message.orEmpty()))
         Log.d(
             "WeatherRepository",
             "there is a exception with weather api, exception is ${exception.message}"

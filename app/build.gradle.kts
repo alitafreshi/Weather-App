@@ -82,6 +82,9 @@ dependencies {
 
     //splash screen
     implementation(libs.core.splashscreen)
+
+    //lottie animation compose
+    implementation(libs.lottie.compose)
 }
 
 kapt {

@@ -4,6 +4,7 @@ import com.tafreshiali.weatherapp.domain.model.CurrentWeatherDetail
 
 data class WeatherViewState(
     val loadingState: Boolean = false,
+    val loadingRefreshState: Boolean = false,
     val errorState: Boolean = false,
     val weatherData: CurrentWeatherDetail? = null
 )

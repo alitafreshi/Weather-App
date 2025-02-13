@@ -28,18 +28,19 @@ class WeatherViewModel @Inject constructor(private val weatherRepository: Weathe
     val nextWeekWeatherForecastingViewState = _nextWeekWeatherForecastingViewState.asStateFlow()
 
     init {
-        Log.d("WEATHER_VIEWMODEL", "INIT BLOCK IS CALLED")
         getWeatherForecastDataByCityName("Tehran")
     }
 
-    fun getWeatherForecastDataByCityName(cityName: String) {
+    fun getWeatherForecastDataByCityName(cityName: String, retryState: Boolean = false) {
         weatherRepository.getWeatherForecastingByLocation(cityName = cityName)
             .onEach { dataState ->
                 when (dataState) {
                     DataState.Loading -> _weatherViewState.update {
+                        Log.d("WeatherViewModel", "CurrentState is Loading")
                         it.copy(
-                            loadingState = true,
-                            errorState = false
+                            loadingState = !retryState,
+                            loadingRefreshState = retryState,
+                            errorState = false,
                         )
                     }
 
@@ -47,6 +48,7 @@ class WeatherViewModel @Inject constructor(private val weatherRepository: Weathe
                         _weatherViewState.update {
                             it.copy(
                                 loadingState = false,
+                                loadingRefreshState = false,
                                 errorState = false,
                                 weatherData = dataState.data
                             )
@@ -56,7 +58,9 @@ class WeatherViewModel @Inject constructor(private val weatherRepository: Weathe
                     is DataState.Error -> _weatherViewState.update {
                         it.copy(
                             loadingState = false,
-                            errorState = true
+                            loadingRefreshState = false,
+                            errorState = true,
+                            weatherData = null
                         )
                     }
                 }
@@ -64,22 +68,23 @@ class WeatherViewModel @Inject constructor(private val weatherRepository: Weathe
             .launchIn(viewModelScope)
     }
 
-    fun getNextWeekWeatherForecastDataByCityName(cityName: String) {
+    fun getNextWeekWeatherForecastDataByCityName(cityName: String, retryState: Boolean = false) {
         weatherRepository.getNextWeekWeatherForecastingByLocation(cityName = cityName)
             .onEach { dataState ->
                 when (dataState) {
                     DataState.Loading -> _nextWeekWeatherForecastingViewState.update {
                         it.copy(
-                            loadingState = true,
-                            errorState = false
+                            loadingState = !retryState,
+                            loadingRefreshState = retryState,
+                            errorState = false,
                         )
                     }
 
                     is DataState.Data -> {
-                        Log.d("WEATHER_DATA", "next week weather forecast data: ${dataState.data}")
                         _nextWeekWeatherForecastingViewState.update {
                             it.copy(
                                 loadingState = false,
+                                loadingRefreshState = false,
                                 errorState = false,
                                 nextWeekWeatherForecastData = dataState.data
                             )
@@ -89,7 +94,9 @@ class WeatherViewModel @Inject constructor(private val weatherRepository: Weathe
                     is DataState.Error -> _nextWeekWeatherForecastingViewState.update {
                         it.copy(
                             loadingState = false,
-                            errorState = true
+                            loadingRefreshState = false,
+                            errorState = true,
+                            nextWeekWeatherForecastData = null
                         )
                     }
                 }

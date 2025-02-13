@@ -20,6 +20,7 @@ composeCoil = "3.0.4"
 composeConstraintLayout = "1.1.0"
 dateTimeThreeTen = "1.4.8"
 splash ="1.0.1"
+lottieAnimation = "6.6.2"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -52,7 +53,7 @@ coil-network = { group = "io.coil-kt.coil3", name = "coil-network-okhttp", versi
 compose-constraint-layout = { group = "androidx.constraintlayout", name = "constraintlayout-compose", version.ref = "composeConstraintLayout" }
 date-time-threeten = { group = "com.jakewharton.threetenabp", name = "threetenabp", version.ref = "dateTimeThreeTen" }
 core-splashscreen = { group = "androidx.core", name="core-splashscreen", version.ref="splash"}
-
+lottie-compose = { group = "com.airbnb.android", name="lottie-compose", version.ref="lottieAnimation"}
 
 [bundles]
 network = ["retrofit", "okhttp", "retrofit-kotlinx-serialization"]
