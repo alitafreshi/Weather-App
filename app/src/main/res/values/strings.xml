@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Weather App</string>
+    <string name="app_name">WeatherX</string>
     <string name="weather_condition_tv_rain_fall_title">RainFall</string>
     <string name="weather_condition_tv_rain_fall_value_in_centimeter">%scm</string>
     <string name="weather_condition_tv_wind_title">Wind</string>
